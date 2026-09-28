@@ -1,0 +1,2 @@
+# Cloudflare Pages: rotas dinâmicas da SPA servem o app (200.html) em vez de 404.
+/admin/rodadas/*  /200.html  200

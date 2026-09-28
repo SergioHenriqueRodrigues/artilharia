@@ -75,14 +75,28 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "gols_rodada_id_assistente_id_fkey"
+            foreignKeyName: "gols_assistente_fkey"
+            columns: ["assistente_id"]
+            isOneToOne: false
+            referencedRelation: "jogadores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gols_assistente_presente_fkey"
             columns: ["rodada_id", "assistente_id"]
             isOneToOne: false
             referencedRelation: "presencas"
             referencedColumns: ["rodada_id", "jogador_id"]
           },
           {
-            foreignKeyName: "gols_rodada_id_autor_id_fkey"
+            foreignKeyName: "gols_autor_fkey"
+            columns: ["autor_id"]
+            isOneToOne: false
+            referencedRelation: "jogadores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gols_autor_presente_fkey"
             columns: ["rodada_id", "autor_id"]
             isOneToOne: false
             referencedRelation: "presencas"
@@ -207,6 +221,20 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "sorteios_jogador_fkey"
+            columns: ["jogador_id"]
+            isOneToOne: false
+            referencedRelation: "jogadores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sorteios_rodada_fkey"
+            columns: ["rodada_id"]
+            isOneToOne: false
+            referencedRelation: "rodadas"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "sorteios_rodada_id_jogador_id_fkey"
             columns: ["rodada_id", "jogador_id"]
             isOneToOne: true
@@ -230,6 +258,10 @@ export type Database = {
           jogador_id: number
           nome: string
         }[]
+      }
+      salvar_sorteio: {
+        Args: { rodada: number; times: Json }
+        Returns: undefined
       }
     }
     Enums: {
